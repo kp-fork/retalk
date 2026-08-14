@@ -200,8 +200,11 @@ What the steps rely on:
   automatically, so peers can message you right away. Skip that with
   `--no-register` and publish later with `retalk register`.
 - **Passphrase.** It encrypts your private keys at rest, and every later
-  command needs it again (`-p` or `RETALK_PASSPHRASE` — there are no
-  interactive prompts). For agents or throwaway identities,
+  command needs it again (`--passphrase-file PATH`, `-p`, or
+  `RETALK_PASSPHRASE` — there are no interactive prompts). For scripts and
+  agents prefer `--passphrase-file`: it names the secret by path, so the
+  passphrase never lands in the command line, the shell history, or the
+  environment, and the whole call stays one flat command. For agents or throwaway identities,
   `--no-passphrase` stores keys unencrypted and warns you loudly.
 - **Lost your ID?** `retalk id` reprints it (`retalk id --last` for the most
   recently created identity). `init` also prints a ready-to-paste invite for
@@ -286,6 +289,8 @@ One line per subcommand, matching `retalk --help`. Run
 | `init` | Create a new identity (the only command that ever does) and publish its keys. |
 | `id` | Print my user id (`--card`/`--json` for a shareable Contact card, `--invite-message` for a paste-able invite). |
 | `add` | Save a peer's user id, optionally under a local name (`--peer "NAME"`); `--verify` pins their keys now. |
+| `invite` | Mint, list, revoke, and watch invite codes (`invite watch` auto-accepts redeemed codes). |
+| `request` | Redeem a peer's invite code: adds them and asks to be added back, in one encrypted step. |
 | `group` | Manage groups: local rosters for fan-out group chat (`create`/`list`/`members`/`add`/`remove`/`delete`). |
 | `verify` | Record a saved peer's keys (explicit first contact). |
 | `contacts` | List saved peers; `--show` one as a Contact card, `--remove` one. |
